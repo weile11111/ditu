@@ -3,13 +3,57 @@
     <title>hahahha</title>
   </head>
   <body>
-  <script type="text/JavaScript">
+    请输入中国尺码<input type="text" id="size" value=""/>
+    请输入您的性别<input type="text" id="sex" value=""/>
+    请输入衣服种类（上衣，裤子，鞋子，内衣）<input type="text" id="sciece" value=""/>
+    <button onclick="qurry()">查询</button>
+    <script type="text/JavaScript">
   <!--
- 
- 
-    window.open("https://weile11111.github.io/ditu");
-   
- 
+  var a
+  function qurry()
+  {
+    var size = document.getElementById("size");
+    var country = document.getElementById("country");
+     var sciece = document.getElementById("sciece");
+     var sex = document.getElementById("sex");
+     var sexList = {"男","女"};
+    var manup = {"韩国":size,"日本":size-68,"美国":size-131,"英国":size-131,"法国":size-121,"意大利":size-121};
+    var mandown={"韩国":size,"日本":size-68,"美国":size,"英国":size,"法国":size-121,"意大利":size-121};
+    var manin={}
+    var manshoe={"韩国":size,"日本":size-68,"美国":size,"英国":size-33,"法国":size,"意大利":size};
+    var womanup={"韩国":size,"日本":size-145,"美国":size-146,"英国":size-144,"法国":size/3.94-4,"意大利":size/3.94};
+    var womandown={"韩国":size,"日本":size-68,"美国":size,"英国":size,"法国":size-121,"意大利":size-121};
+    var womanshoe={"韩国":size,"日本":size,"美国":size-14,"英国":size-17,"法国":size+1,"意大利":size};
+    var value = 0
+    if (country in manup)
+    {if(sciece=="上衣")
+      {
+        if(sex=="男")
+          {value=manup[country]}
+        else
+        {value=womanup[country]}
+      }
+     else if(sciece=="裤子")
+     { if(sex=="男")
+          {value=mandown[country]}
+        else
+        {value=womandown[country]}}
+      else if(sciece=="鞋子")
+     { if(sex=="男")
+          {value=manshoe[country]}
+        else
+        {value=womanshoe[country]}}
+      else if(sciece=="内衣")
+     { if(sex=="男")
+          {value=manup[country]}
+        else
+        {value=womanup[country]}}
+    }
+    else
+    {alert("请输入韩国、日本、美国、英国、法国、意大利之一")}
+    alert(value);
+  }
+      
    
   
   -->
