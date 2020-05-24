@@ -1,11 +1,12 @@
 <html>
   <head>
-    <title>hahahha</title>
+    <title>中外衣物尺码转换器</title>
   </head>
   <body>
-    请输入中国尺码<input type="number" id="size" value=""/>请输入国家<input type="text" id="country" value=""/>
-    请输入您的性别<input type="text" id="sex" value=""/>
     请输入衣服种类（上衣，裤子，鞋子，内衣）<input type="text" id="sciece" value=""/>
+    请输入中国衣服尺码<input type="number" id="size" value=""/>
+    请输入国家<input type="text" id="country" value=""/>
+    请输入您的性别<input type="text" id="sex" value=""/>
     <button onclick="qurry()">查询</button>
     <script type="text/JavaScript">
    
@@ -31,6 +32,7 @@
     var womandown = cosole4()
     var womanup = cosole5()
     var value = 0
+    alert(country)
     if (country in manup)
     {if(sciece=="上衣"){if(sex=="男"){value=manup[country]}else{value=womanup[country]}}
     else if(sciece=="裤子"){ if(sex=="男"){value=mandown[country]}else{value=womandown[country]}}
