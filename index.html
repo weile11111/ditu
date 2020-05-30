@@ -8,36 +8,10 @@
     请输入国家<input type="text" id="country" value=""/>
     请输入您的性别<input type="text" id="sex" value=""/>
     <button onclick="qurry()">查询</button>
-    <script type="text/JavaScript">
-   
-  
-  function qurry()
-  { var size = document.getElementById("size").value;
-    var country = document.getElementById("country").value;
-     var sciece = document.getElementById("sciece").value;
-     var sex = document.getElementById("sex").value;
-       var sexList = {"男":1,"女":2};
-    var manup = {"韩国":0,"日本":0,"美国":0,"英国":0,"法国":0,"意大利":0}
-     function add(list,size){return function(){for(var i in list){list[i]=list[i]+size}return list}}
-    var cosole1 =add(manup,size)
-    var cosole2 =add(manup,size+2)
-    var cosole3 =add(manup,size+3)
-    var cosole4 =add(manup,size+4)
-    var cosole5 =add(manup,size+5)
-    var cosole6 =add(manup,size+6)
-    var manup = cosole6()
-    var mandown = cosole1()
-    var manshoe=cosole2()
-    var womanshoe = cosole3()
-    var womandown = cosole4()
-    var womanup = cosole5()
-   switch sciece:
-     case 上衣:switch sex case:男:alert(mandown[country]) case 女:alert(womandown[country])
-     case 鞋子:switch sex case:男:alert(mandown[country]) case 女:alert(womandown[country])
-     case 内衣:switch sex case:男:alert(mandown[country]) case 女:alert(womandown[country])
-     case 裤子:switch sex case:男:alert(mandown[country]) case 女:alert(womandown[country])
-  }
-    </script> 
+  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script type="text/javascript">
+document.write(returnCitySN["cip"]+','+returnCitySN["cname"])
+</script>
   </body>
 </html>
   
