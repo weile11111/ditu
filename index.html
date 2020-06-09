@@ -15,6 +15,78 @@
            <script>  
            d3.select("body").select("p").text("SWUSTVIS");      
            </script> 
+   
+        <title>基于GeoJSON绘制中国地图</title>
+      <style>
+         .province {
+            stroke: black;
+            stroke-width: 1px;
+         }
+         .southchinasea {
+            stroke: black;
+            stroke-width: 1px;
+            fill: red;
+         }
+      </style>
+ 
+      <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+      <script>
+         var  width=(window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth)*0.98;
+         //只要“||”前面为false,不管“||”后面是true还是false，都返回“||”后面的值。只要“||”前面为true,不管“||”后面是true还是false，都返回“||”前面的值。
+         var  height=(window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight)*0.98;
+         
+         var svg = d3.select("body").append("svg")
+                  .attr("width", width)
+                  .attr("height", height);
+                  
+         //定义地图的投影
+         var projection = d3.geo.mercator()
+                           .center([107, 31])//指定地图中心经纬度
+                           .scale(550)//比例尺
+                           .translate([width/2, height/2]);//平移坐标原点到SVG绘图区宽高一半的位置
+                           
+         //定义地形路径生成器
+         var path = d3.geo.path()
+                   .projection(projection);  //设定投影
+                   
+         //颜色比例尺
+         var color = d3.scale.category20b();
+         
+         //请求china.geojson
+         d3.json("China.geojson", function(error, root) {
+            if (error)
+               return console.error(error);
+            console.log(root);
+            
+            var groups = svg.append("g");
+            
+            groups.selectAll("path")
+                  .data(root.features)//添加数据
+                  .enter()
+                  .append("path")
+                  .attr("class","province")//引用之前定义的类吧
+                  .style("fill", function(d,i){//填充颜色，这里可以加一个人数-颜色比例尺
+                     return color(i);
+                  })
+                  .attr("d", path ); //使用路径生成器
+         });
+         
+         //请求southchinasea.svg，大概是把另一个svg添加到我们的svg中
+         d3.xml("southchinasea.svg", function(error, xmlDocument) {
+            svg.html(function(d){
+               return d3.select(this).html() + xmlDocument.getElementsByTagName("g")[0].outerHTML;
+            });
+            
+            d3.select("#southchinasea")
+               .attr("transform","translate(1100,500)scale(0.5)")//放大缩小比例尺
+               .attr("class","southchinasea");
+         });
+         
+      </script>
+   
+
+ 
+
      
 
    <img style="left: 137.5px; top: 0px; width: 355px; height: 355px;" src="https://image.baidu.com/search/detail?ct=503316480&z=&tn=baiduimagedetail&ipn=d&word=%E6%97%A2%E7%84%B6%E6%82%A8%E6%9D%A5%E4%BA%86&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=-1&hd=undefined&latest=undefined&copyright=undefined&cs=3200177005,215259026&os=1386806152,2846834879&simid=4134976064,564255900&pn=2&rn=1&di=195800&ln=1186&fr=&fmq=1591168113083_R&fm=index&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&is=0,0&istype=2&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201609%2F15%2F20160915091618_3dnCU.thumb.700_0.jpeg&rpstart=0&rpnum=0&adpicid=0&force=undefined">
